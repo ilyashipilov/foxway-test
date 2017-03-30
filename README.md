@@ -30,7 +30,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.
 </pre>
 
 В терминале перейдем в папку с этими файлами и выполним: <code>docker build -t restapp .</code>, тем самым создав образ с нашим модулем.
-Затем запустим контейнер: <code>docker run -d -p 8080:8080</code>
+Затем запустим контейнер: <code>docker run -d -p 8080:8080 restapp</code>
 
 ## клиентский модуль
 
