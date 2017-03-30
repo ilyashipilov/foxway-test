@@ -34,5 +34,19 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.
 
 ## клиентский модуль
 
-Клиентский модуль будет представлен парой http-запросов через curl
-TODO
+Клиентский модуль будет представлен парой http-запросов через curl.
+Узнаем IP-адрес серверного модуля при помощи команды <code>docker inspect 5c22bdedd042D</code>, где 5c22bdedd042D - id контейнера, и
+напишем shell-скрипт:
+<pre>
+#!/usr/bin/env bash
+curl -X POST -H 'Content-Type: application/json' -d '{"algorithm":"MIN","data":[1,2,5,3,4]}' http://172.17.0.2:8080/min
+</pre>
+
+Находим на docker hub образ с установленным curl, и делаем свой:
+<pre>
+FROM hiromasaono/curl
+MAINTAINER ilya.shipilov@gmail.com
+ADD script.sh script.sh
+</pre>
+
+Выполнив команду <code>docker run -ti curlapp2 sh ./script.sh</code> увидим результат, полученный от серверного модуля.
