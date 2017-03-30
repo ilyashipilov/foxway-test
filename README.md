@@ -16,4 +16,23 @@
 
 # Запуск в Docker
 
+## серверный модуль
+
+Для работы серверного модуля создадим образ контейнера. Для этого билд (собранный с плагином spring-boot) разместим рядом с файлом Docker:
+<pre>
+FROM java:8
+MAINTAINER ilya.shipilov@gmail.com
+EXPOSE 8080
+
+ADD ROOT.war app.jar
+RUN bash -c 'touch /app.jar'
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=container","-jar","/app.jar"]
+</pre>
+
+В терминале перейдем в папку с этими файлами и выполним: <code>docker build -t restapp .</code>, тем самым создав образ с нашим модулем.
+Затем запустим контейнер: <code>docker run -d -p 8080:8080</code>
+
+## клиентский модуль
+
+Клиентский модуль будет представлен парой http-запросов через curl
 TODO
