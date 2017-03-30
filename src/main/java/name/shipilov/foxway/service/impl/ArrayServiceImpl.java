@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Реализация алгоритмов та же самая, что на собеседовании, менять не стал, требованиям удовлетворяет
+ */
 @Component
 public class ArrayServiceImpl implements ArrayService {
 
